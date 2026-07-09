@@ -1,0 +1,11 @@
+#!/bin/sh
+
+curl=`which curl`
+
+if [ $? != 0 ]
+then
+  echo 'curl binary not found.'
+  exit 1
+fi
+
+$curl -4s https://icanhazip.com
