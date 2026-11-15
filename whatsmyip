@@ -1,11 +1,12 @@
 #!/bin/sh
-
 curl=`which curl`
-
 if [ $? != 0 ]
 then
-  echo 'curl binary not found.'
+  echo "curl not found."
   exit 1
 fi
-
-$curl -4s https://icanhazip.com
+urls="myip.tit4nium.fr icanhazip.com api.ipify.org myip.ovh ident.me ifconfig.co checkip.amazonaws.com"
+for url in $urls
+do
+  $curl -4s -m4 "https://${url}" | grep -E '^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$' && break
+done
